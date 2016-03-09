@@ -1,0 +1,17 @@
+<h1>Test</h1>
+<p>Test</p>
+<a href="/">home</a>
+<div>
+  <h2>A list of businesses using block / mustache iterator </h2>
+  <ul>
+    {{#businesses}}
+      <li>Name: {{name}} </li>  
+    {{/businesses}}
+  </ul>
+</div>
+<div>
+  <h2>A list of same business and same iterator, using partials</h2>
+    {{#businesses}}
+      {{> business }}
+    {{/businesses}}
+</div>
