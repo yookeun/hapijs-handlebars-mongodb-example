@@ -37,24 +37,56 @@ server.views({
 	  helpersPath: './views/helpers',
 	  partialsPath: './views/partials'
 	});
+server.route({
+  method: 'GET',
+  path: '/',
+  handler: function (request, reply) {
+    var templateData = {
+      title: 'This is Index!',
+      message: 'mondoDB with and without handlebars template'
+    };
+
+    return reply.view('index', templateData);
+  }
+});
 
 server.route([
 	{
 		method: 'GET',
-		path: '/allbooks',
+		path: '/allitems',
 		config: {
-			handler: (request, reply) => {
+				handler: (request, reply) => {
 
 				const db = request.server.plugins['hapi-mongodb'].db;
-    			const pjdata = db.collection('businesses');
+				const testData = db.collection('restaurants');
+
+				reply(testData.find({}, {name:1}).toArray());	//filter only with ID + TITLE
+			},
+
+			cors: true
+		},
+		
+	}
+]);
+
+server.route([
+	{
+		method: 'GET',
+		path: '/allitems2',
+		config: {
+				handler: (request, reply) => {
+
+				const db = request.server.plugins['hapi-mongodb'].db;
+				const testData = db.collection('restaurants');
     			
-				pjdata.find((err, docs) => {
+				testData.find((err, docs) => {
+				// testData.find({}, {name:1}).toArray()((err, docs) => {
 
 			        if (err) {
 			          return reply(Boom.badData('Internal MongoDB error', err));
 			        }
-
-			        reply.view('fortune', docs);
+			        // reply(docs);
+			        reply.view('listings', docs);
 			        console.log("working");
 			      });
 
@@ -62,56 +94,8 @@ server.route([
 			cors: true
 		},
 		
-	},
-	{
-		method: 'POST',
-		path: '/addbook',
-		config: {
-			handler: (request, reply) => {
-				var db = request.server.plugins['hapi-mongodb'].db;
-				var dbDoc = {
-					"title" : request.payload.title,
-					"author": request.payload.author,
-					"pages": request.payload.pages,
-					"category": request.payload.category,
-				};
-				console.log(dbDoc);
-				db.collection('books').updateOne({"title": request.payload.title}, dbDoc, {upsert: true}, (err, result) => {
-					if(err) return reply(Boom.internal('Internal MongoDB error', err));
-					return reply(result);
-				});
-			},
-			validate: {
-				payload: {
-					title: Joi.string().required(),
-					author: Joi.string().required(),
-					pages: Joi.number().required(),
-					category: Joi.string().required()
-				}
-			},
-			cors: true
-		}
-		
-	},
-	{
-		method: 'GET',
-		path: '/bookdetails/{id}',
-		config: {
-			handler: (request, reply) => {
-				var db = request.server.plugins['hapi-mongodb'].db;
-				var ObjectID = request.server.plugins['hapi-mongodb'].ObjectID;
-				
-				db.collection('books').findOne({"_id" : new ObjectID(request.params.id)}, (err, result) => {
-					if(err) return reply(Boom.internal('Internal MongoDB error', err));
-					return reply(result);
-				})
-			},
-			cors: true
-		}
-		
 	}
 ]);
-
 server.register({
     register: MongoDB,
     options: DBConfig.opts
