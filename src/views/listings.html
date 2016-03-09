@@ -2,16 +2,16 @@
 <p>Test</p>
 <a href="/">home</a>
 <div>
-  <h2>A list of businesses using block / mustache iterator </h2>
+  <h2>A list of restaurats using block / mustache iterator </h2>
   <ul>
-    {{#businesses}}
+    {{#restaurants}}
       <li>Name: {{name}} </li>  
-    {{/businesses}}
+    {{/restaurants}}
   </ul>
 </div>
 <div>
-  <h2>A list of same business and same iterator, using partials</h2>
-    {{#businesses}}
-      {{> business }}
-    {{/businesses}}
+  <h2>A list of same restaurants and same iterator, using partials</h2>
+    {{#restaurants}}
+      {{> eachRestaurant }}
+    {{/restaurants}}
 </div>
