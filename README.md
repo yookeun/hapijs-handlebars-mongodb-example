@@ -1,2 +1,5 @@
-# hapijs-handlebars-mongodb-example
-Example of how to get a mongodb db call to render in handlebars in Hapijs
+# Hapi.js + Handlebars + MongoDB example
+
+This is a sample project to show the how to connect a [mongoDB](https://www.mongodb.org/) database with [Hapi.js](http://hapijs.com/) application, make a GET request on the mongoDB database and render the response in Hapi.js with Handlebars templating.
+
+Extenstion of https://github.com/lucamezzalira/hapijs-mongodb-example
