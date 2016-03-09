@@ -22,32 +22,33 @@ server.register(require('vision'), (err) => {
 });
 
 server.views({
-	  engines: {
-	    html: {
+	engines: {
+	html: {
 
-	    	module: require('handlebars'),
-	    	compileMode:'sync' // engine specific
+		module: require('handlebars'),
+		compileMode:'sync' // engine specific
 
-    	}
-	  },
-	  // compileMode: 'async', // global setting
-	  path: './views',
-	  layoutPath: './views/layout',
-	  layout: 'default',
-	  helpersPath: './views/helpers',
-	  partialsPath: './views/partials'
-	});
+	}
+	},
+	// compileMode: 'async', // global setting
+	path: './views',
+	layoutPath: './views/layout',
+	layout: 'default',
+	helpersPath: './views/helpers',
+	partialsPath: './views/partials'
+});
+
 server.route({
-  method: 'GET',
-  path: '/',
-  handler: function (request, reply) {
-    var templateData = {
-      title: 'This is Index!',
-      message: 'mondoDB with and without handlebars template'
-    };
+	method: 'GET',
+	path: '/',
+	handler: function (request, reply) {
+	var templateData = {
+	  title: 'Rendering Handlebars in Hapijs from a mongoDB response',
+	  message: 'mondoDB with and without handlebars template'
+	};
 
-    return reply.view('index', templateData);
-  }
+	return reply.view('index', templateData);
+	}
 });
 
 server.route([
@@ -107,3 +108,6 @@ server.register({
 	
 	server.start((err) => console.log('Server started at:', server.info.uri));
 });
+
+
+// server.start((err) => console.log('Server started at:', server.info.uri));

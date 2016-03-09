@@ -1,13 +1,13 @@
 {
-  "name": "hapijs-mongodb",
+  "name": "hapijs-handlebars-mongodb-example",
   "version": "1.0.0",
-  "description": "example of how to integrate hapijs with mongoDB",
+  "description": "example of how to use handlebars in Hapijs with mongoDB",
   "main": "src/index.js",
   "scripts": {
-    "demon": "nodemon src/index.js --harmony",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "luca mezzalira <mezzalab@gmail.com> (http://lucamezzalira.com)",
+  "author": "Alain Armand https://github.com/kaona",
   "license": "ISC",
   "dependencies": {
     "boom": "^3.0.0",
