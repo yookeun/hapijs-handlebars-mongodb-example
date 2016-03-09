@@ -109,5 +109,3 @@ server.register({
 	server.start((err) => console.log('Server started at:', server.info.uri));
 });
 
-
-// server.start((err) => console.log('Server started at:', server.info.uri));
